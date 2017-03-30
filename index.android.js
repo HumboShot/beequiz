@@ -6,30 +6,127 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+  AppRegistry, StyleSheet, Text, View, ListView, Button
 } from 'react-native';
 
 export default class bquiz extends Component {
   render() {
+    let realm = new Realm({ schema: [QuizSchema, QuestionSchema, AnswerSchema] });
+
+fillDb();
+
+    //tilføj sletning af tabelindhold til en kanp
+
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
+
+      
+    
+       
+        <Text>Number of questions is:  {realm.objects('Question').length}</Text>
+
+
+
       </View>
     );
+
+function fillDb() {
+//let realm = new Realm({ schema: [QuizSchema, QuestionSchema, AnswerSchema] });
+  //create Quiz
+  
+  realm.write(() => {
+
+    realm.create('Quiz', { id: 2, name: 'Bier for begynder' })
+
+  })
+
+  //create questions
+  
+  realm.write(() => {
+    realm.create('Question', { id: 1, question: 'Q1', questionStatus: 0, quizId: 1 })
+    realm.create('Question', { id: 2, question: 'Q2', questionStatus: 0, quizId: 1 })
+    realm.create('Question', { id: 3, question: 'Q3', questionStatus: 0, quizId: 1 })
+    realm.create('Question', { id: 4, question: 'Q4', questionStatus: 0, quizId: 1 })
+    realm.create('Question', { id: 5, question: 'Q5', questionStatus: 0, quizId: 1 })
+  })
+
+  //create answers  
+  
+  realm.write(() => {
+    //svar til Q1
+    realm.create('Answer', { id: 1, answer: 'svar1', questionId: 1, flag: true })
+    realm.create('Answer', { id: 2, answer: 'svar2', questionId: 1, flag: false })
+    realm.create('Answer', { id: 3, answer: 'svar3', questionId: 1, flag: false })
+    //svar til Q2
+    realm.create('Answer', { id: 4, answer: 'svar1', questionId: 2, flag: true })
+    realm.create('Answer', { id: 5, answer: 'svar2', questionId: 2, flag: false })
+    realm.create('Answer', { id: 6, answer: 'svar3', questionId: 2, flag: false })
+
+    //svar til Q3
+    realm.create('Answer', { id: 7, answer: 'svar1', questionId: 3, flag: true })
+    realm.create('Answer', { id: 8, answer: 'svar2', questionId: 3, flag: false })
+    realm.create('Answer', { id: 9, answer: 'svar3', questionId: 3, flag: false })
+
+    //svar til Q4
+    realm.create('Answer', { id: 10, answer: 'svar1', questionId: 4, flag: true })
+    realm.create('Answer', { id: 11, answer: 'svar2', questionId: 4, flag: false })
+    realm.create('Answer', { id: 12, answer: 'svar3', questionId: 4, flag: false })
+
+    //svar til Q5
+    realm.create('Answer', { id: 13, answer: 'svar1', questionId: 5, flag: true })
+    realm.create('Answer', { id: 14, answer: 'svar2', questionId: 5, flag: false })
+    realm.create('Answer', { id: 15, answer: 'svar3', questionId: 5, flag: false })
+
+  })
+  
+}
+
   }
 }
+
+// Define tables
+
+var Realm = require('realm')
+
+const QuestionSchema = {
+  name: 'Question',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    question: 'string',
+    questionStatus: 'int',
+    quizId: 'int'
+
+  }
+}
+
+const QuizSchema = {
+  name: 'Quiz',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    name: 'string',
+    questionFinished: { type: 'bool', default: false },
+    score: { type: 'int', default: 0 }
+
+  }
+}
+
+const AnswerSchema = {
+  name: 'Answer',
+  primaryKey: 'id',
+  properties: {
+    id: 'int',
+    answer: 'string',
+    questionId: 'int',
+    flag: 'bool'
+
+  }
+}
+
+
+
+
 
 const styles = StyleSheet.create({
   container: {

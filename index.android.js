@@ -6,26 +6,45 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry, StyleSheet, Text, View, ListView, Button
+  AppRegistry, StyleSheet, Text, View, ListView, Button, Radio
+
 } from 'react-native';
+import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+
 
 export default class bquiz extends Component {
   render() {
     let realm = new Realm({ schema: [QuizSchema, QuestionSchema, AnswerSchema] });
 
-    fillDb();
 
+
+    fillDb();
+    let res1 = realm.objects('Answer').filtered('id ="1"');
+    let res2 = realm.objects('Answer').filtered('id ="2"');
+    let res3 = realm.objects('Answer').filtered('id ="3"');
+     
+    var radio_props = [
+      { label: res1[0].answer, value: res1[0].flag },
+      { label: res2[0].answer, value: res2[0].flag},
+      { label: res3[0].answer, value: res3[0].flag}
+    ];
     //tilføj sletning af tabelindhold til en kanp
 
     return (
-      <View style={styles.container}>
+      <View>
 
-
-
-
+        <Text>Number of quizes is:  {realm.objects('Quiz').length}</Text>
         <Text>Number of questions is:  {realm.objects('Question').length}</Text>
+        <Text>Number of answers is:  {realm.objects('Answer').length}</Text>
 
-
+        <View>
+          <RadioForm
+            radio_props={radio_props}
+            initial={0}
+            onPress={(value) => { this.setState({ value: value }) }}
+          />
+                   
+        </View>
 
       </View>
     );
@@ -39,7 +58,7 @@ export default class bquiz extends Component {
         let allQuiz = realm.objects('Quiz');
         realm.delete(allQuiz); // Deletes all Quiz
         //Start of create
-        realm.create('Quiz', { id: 2, name: 'Bier for begynder' })
+        realm.create('Quiz', { id: 1, name: 'Bier for begynder' })
       })
 
       //create questions

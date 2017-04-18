@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import realm from '../realm';
 
 export default class ChatScreen extends Component {
     static navigationOptions = {
@@ -9,7 +10,7 @@ export default class ChatScreen extends Component {
     render() {
         return (
             <View>
-                <Text style={styles.text}>Chat with react native class!</Text>
+                <Text style={styles.text}>Num of answeres = {realm.objects('Answer').length}</Text>
             </View>
         )
     }

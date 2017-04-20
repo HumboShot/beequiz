@@ -4,13 +4,13 @@ import { View, Text, Button } from 'react-native';
 //where each new screen is put on the top of the stack 
 //and going back removes a screen from the top of the stack
 import { StackNavigator } from 'react-navigation';
-import ChatWithClass from './components/ChatScreen';
+import Q1 from './components/Q1Screen';
 import  Data from './FillDb.js';
 import realm from './realm.js'
 
 class App extends Component {
     static navigationOptions = {
-        title: 'Welcome'
+        title: 'Welcome to BeeQuiz'
     };
    
     render() {
@@ -21,7 +21,7 @@ class App extends Component {
         const { navigate } = this.props.navigation;
 
         //console.log(this.state)
-       Data.fillDb();
+      // Data.fillDb();
 
 
         return (
@@ -31,8 +31,8 @@ class App extends Component {
 
                 <Text style={styles.text}>Welcome to beequizzz!</Text>
                 <Button
-                    onPress={() => navigate('Chat')}
-                    title="Chat with class"
+                    onPress={() => navigate('Question_1')}
+                    title="Start Quiz"
                 />
             </View>
         )
@@ -43,7 +43,7 @@ class App extends Component {
 
 const Navigator = StackNavigator({
     Home: { screen: App },
-    Chat: { screen: ChatWithClass }
+    Question_1: { screen: Q1 }
 })
 
 const styles = {

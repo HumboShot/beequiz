@@ -3,6 +3,7 @@
 import realm from './realm';
 
 
+
 var Data = {
   fillDb: function(){
      realm.write(() => {
@@ -62,6 +63,8 @@ var Data = {
     })
 
   }
+
+
 }
 
 

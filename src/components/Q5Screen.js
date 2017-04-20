@@ -3,31 +3,29 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 import { View, Text, Button, Alert } from 'react-native';
 import realm from '../realm';
 
-
-
-export default class Q1Screen extends Component {
+export default class Q5Screen extends Component {
     static navigationOptions = {
-        title: 'Question 1'
+        title: 'Question 5'
     };
 
 
 
     render() {
- const { navigate } = this.props.navigation;
+const { navigate } = this.props.navigation;
 
         let q = realm.objects('Question');
-        let q1 = q.filtered('id = 1')[0];
-        let ans = realm.objects('Answer').filtered('questionId = 1');
+        let q1 = q.filtered('id = 5')[0];
+        let ans = realm.objects('Answer').filtered('questionId = 5');
 
-      
 handleNext = function () {
    
-    navigate('Question_2');
+    navigate('Home');
 }
 
         return (
             <View>
 
+                <Text>Q5Screen</Text>
                 <View>
                     <Text style={styles.text}> {JSON.stringify(q1.question)} </Text>
                 </View>
@@ -47,32 +45,28 @@ handleNext = function () {
                         <Button title={ans[2].answer} onPress={() => handlePress(2)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title='Next question' onPress={() => handleNext()} ></Button>
+                        <Button title='Back to Home' onPress={() => handleNext()} ></Button>
                     </View>
-
-
-
                 </View>
             </View>
         )
     }
 }
-handlePress = function () {
-    let ans = realm.objects('Answer').filtered('questionId = 1');
+
+handlePress = function (i) {
+    let ans = realm.objects('Answer').filtered('questionId = 5');
 
     if (ans[i].flag) {
         realm.write(() => {
-            realm.create('Question', { id: 1, questionStatus: 1 }, true);
+            realm.create('Question', { id: 5, questionStatus: 1 }, true);
         });
     } else {
         realm.write(() => {
-            realm.create('Question', { id: 1, questionStatus: 2 }, true);
+            realm.create('Question', { id: 5, questionStatus: 2 }, true);
         });
     }
-    let status = realm.objects('Question').filtered('id = 1')[0].questionStatus
+    let status = realm.objects('Question').filtered('id = 5')[0].questionStatus
     Alert.alert('hej', JSON.stringify(status));
-    
-    
 }
 
 

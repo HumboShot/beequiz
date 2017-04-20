@@ -5,6 +5,10 @@ import { View, Text, Button } from 'react-native';
 //and going back removes a screen from the top of the stack
 import { StackNavigator } from 'react-navigation';
 import Q1 from './components/Q1Screen';
+import Q2 from './components/Q2Screen';
+import Q3 from './components/Q3Screen';
+import Q4 from './components/Q4Screen';
+import Q5 from './components/Q5Screen';
 import  Data from './FillDb.js';
 import realm from './realm.js'
 
@@ -43,7 +47,11 @@ class App extends Component {
 
 const Navigator = StackNavigator({
     Home: { screen: App },
-    Question_1: { screen: Q1 }
+    Question_1: { screen: Q1 },
+    Question_2: { screen: Q2 },
+    Question_3: { screen: Q3 },
+    Question_4: { screen: Q4 },
+    Question_5: { screen: Q5 },
 })
 
 const styles = {

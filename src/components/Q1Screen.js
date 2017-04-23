@@ -20,7 +20,7 @@ export default class Q1Screen extends Component {
         let ans = realm.objects('Answer').filtered('questionId = 1');
 
       
-handleNext = function () {
+handleNext1 = function () {
    
     navigate('Question_2');
 }
@@ -38,16 +38,16 @@ handleNext = function () {
                 <View>
 
                     <View style={styles.button}>
-                        <Button title={ans[0].answer} onPress={() => handlePress(0)} ></Button>
+                        <Button title={ans[0].answer} onPress={() => handlePress1(0)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title={ans[1].answer} onPress={() => handlePress(1)} ></Button>
+                        <Button title={ans[1].answer} onPress={() => handlePress1(1)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title={ans[2].answer} onPress={() => handlePress(2)} ></Button>
+                        <Button title={ans[2].answer} onPress={() => handlePress1(2)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title='Next question' onPress={() => handleNext()} ></Button>
+                        <Button title='Next question' onPress={() => handleNext1()} ></Button>
                     </View>
 
 
@@ -57,22 +57,21 @@ handleNext = function () {
         )
     }
 }
-handlePress = function () {
+handlePress1 = function (i) {
     let ans = realm.objects('Answer').filtered('questionId = 1');
 
     if (ans[i].flag) {
         realm.write(() => {
             realm.create('Question', { id: 1, questionStatus: 1 }, true);
         });
+        Alert.alert('Your answere is Correct');
     } else {
         realm.write(() => {
             realm.create('Question', { id: 1, questionStatus: 2 }, true);
         });
+        Alert.alert('Your answere is Incorrect');
     }
-    let status = realm.objects('Question').filtered('id = 1')[0].questionStatus
-    Alert.alert('hej', JSON.stringify(status));
-    
-    
+ 
 }
 
 

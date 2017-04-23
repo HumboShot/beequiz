@@ -9,41 +9,49 @@ import Q2 from './components/Q2Screen';
 import Q3 from './components/Q3Screen';
 import Q4 from './components/Q4Screen';
 import Q5 from './components/Q5Screen';
-import  Data from './FillDb.js';
+import Finish from './components/FScreen';
+import Data from './FillDb.js';
 import realm from './realm.js'
 
 class App extends Component {
     static navigationOptions = {
         title: 'Welcome to BeeQuiz'
     };
-   
+
     render() {
-        
+
         // We have wrapped our App component into the StackNavigator. 
         // The StackNavigator exposes the navigation properties.
-       
+
         const { navigate } = this.props.navigation;
 
         //console.log(this.state)
-      // Data.fillDb();
+
 
 
         return (
             <View style={styles.container}>
+                <Button
+                    onPress={() => nulstilData()} title='Reset Quiz'
+                />
 
                 <Text >num of questions - {realm.objects('Question').length}</Text>
 
                 <Text style={styles.text}>Welcome to beequizzz!</Text>
                 <Button
                     onPress={() => navigate('Question_1')}
-                    title="Start Quiz"
+                    title='Start Quiz'
                 />
             </View>
         )
-        
+
     }
 
 }
+nulstilData = function () {
+    Data.fillDb();
+}
+
 
 const Navigator = StackNavigator({
     Home: { screen: App },
@@ -52,6 +60,7 @@ const Navigator = StackNavigator({
     Question_3: { screen: Q3 },
     Question_4: { screen: Q4 },
     Question_5: { screen: Q5 },
+    Finish: { screen: Finish }
 })
 
 const styles = {

@@ -26,7 +26,7 @@ var Data = {
       realm.create('Question', { id: 3, question: 'Q3', questionStatus: 0, quizId: 1 })
       realm.create('Question', { id: 4, question: 'Q4', questionStatus: 0, quizId: 1 })
       realm.create('Question', { id: 5, question: 'Q5', questionStatus: 0, quizId: 1 })
-      realm.create('Question', { id: 6, question: 'Q5', questionStatus: 0, quizId: 1 })
+     
     })
 
     //create answers  

@@ -17,7 +17,7 @@ const { navigate } = this.props.navigation;
         let q1 = q.filtered('id = 4')[0];
         let ans = realm.objects('Answer').filtered('questionId = 4');
 
-handleNext = function () {
+handleNext4 = function () {
    
     navigate('Question_5');
 }
@@ -36,16 +36,16 @@ handleNext = function () {
                 <View>
 
                     <View style={styles.button}>
-                        <Button title={ans[0].answer} onPress={() => handlePress(0)} ></Button>
+                        <Button title={ans[0].answer} onPress={() => handlePress4(0)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title={ans[1].answer} onPress={() => handlePress(1)} ></Button>
+                        <Button title={ans[1].answer} onPress={() => handlePress4(1)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title={ans[2].answer} onPress={() => handlePress(2)} ></Button>
+                        <Button title={ans[2].answer} onPress={() => handlePress4(2)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title='Next question' onPress={() => handleNext()} ></Button>
+                        <Button title='Next question' onPress={() => handleNext4()} ></Button>
                     </View>
                 </View>
             </View>
@@ -53,20 +53,21 @@ handleNext = function () {
     }
 }
 
-handlePress = function (i) {
+handlePress4 = function (i) {
     let ans = realm.objects('Answer').filtered('questionId = 4');
 
     if (ans[i].flag) {
         realm.write(() => {
             realm.create('Question', { id: 4, questionStatus: 1 }, true);
         });
+         Alert.alert('Your answere is Correct');
     } else {
         realm.write(() => {
             realm.create('Question', { id: 4, questionStatus: 2 }, true);
         });
+        Alert.alert('Your answere is Incorrect');
     }
-    let status = realm.objects('Question').filtered('id = 4')[0].questionStatus
-    Alert.alert('hej', JSON.stringify(status));
+  
 }
 
 

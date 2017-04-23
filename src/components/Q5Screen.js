@@ -17,9 +17,9 @@ const { navigate } = this.props.navigation;
         let q1 = q.filtered('id = 5')[0];
         let ans = realm.objects('Answer').filtered('questionId = 5');
 
-handleNext = function () {
+handleNext5 = function () {
    
-    navigate('Home');
+    navigate('Finish');
 }
 
         return (
@@ -36,16 +36,16 @@ handleNext = function () {
                 <View>
 
                     <View style={styles.button}>
-                        <Button title={ans[0].answer} onPress={() => handlePress(0)} ></Button>
+                        <Button title={ans[0].answer} onPress={() => handlePress5(0)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title={ans[1].answer} onPress={() => handlePress(1)} ></Button>
+                        <Button title={ans[1].answer} onPress={() => handlePress5(1)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title={ans[2].answer} onPress={() => handlePress(2)} ></Button>
+                        <Button title={ans[2].answer} onPress={() => handlePress5(2)} ></Button>
                     </View>
                     <View style={styles.button}>
-                        <Button title='Back to Home' onPress={() => handleNext()} ></Button>
+                        <Button title='Finish' onPress={() => handleNext5()} ></Button>
                     </View>
                 </View>
             </View>
@@ -53,20 +53,21 @@ handleNext = function () {
     }
 }
 
-handlePress = function (i) {
+handlePress5 = function (i) {
     let ans = realm.objects('Answer').filtered('questionId = 5');
 
     if (ans[i].flag) {
         realm.write(() => {
             realm.create('Question', { id: 5, questionStatus: 1 }, true);
         });
+         Alert.alert('Your answere is Correct');
     } else {
         realm.write(() => {
             realm.create('Question', { id: 5, questionStatus: 2 }, true);
         });
+        Alert.alert('Your answere is Incorrect');
     }
-    let status = realm.objects('Question').filtered('id = 5')[0].questionStatus
-    Alert.alert('hej', JSON.stringify(status));
+   
 }
 
 
